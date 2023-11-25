@@ -1,0 +1,54 @@
+<div class="row gap-3 custom">
+    <h1 class="p-0 fw-semi-bold">Bem-vindo(a) ao e-Agenda Médica</h1>
+  
+    <div class="row gap-3">
+  
+      <!-- Card médicos dashboard -->
+      <mat-card 
+        appCardHover 
+        class="col-12 col-md-6 col-lg-3 d-grid gap-2"
+        routerLink="/medicos/listar"
+      >
+        <mat-card-header>
+          <mat-card-title>Médicos</mat-card-title>
+          <mat-icon class="ms-auto">arrow_drop_down</mat-icon>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <span>Crie perfis de médicos para uma organização eficaz de consultas e cirurgias.</span>
+        </mat-card-content>
+      </mat-card>
+  
+      <!-- Card consultas dashboard -->
+      <mat-card 
+        appCardHover 
+        class="col-12 col-md-6 col-lg-3 d-grid gap-2"
+        routerLink="/consultas/listar"
+      >
+        <mat-card-header>
+          <mat-card-title>Consultas</mat-card-title>
+          <mat-icon class="ms-auto">arrow_drop_down</mat-icon>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <span>Agende suas consultas de forma conveniente e eficiente.</span>
+        </mat-card-content>
+      </mat-card>
+  
+      <!-- Card cirurgias dashboard -->
+      <mat-card 
+        appCardHover 
+        class="col-12 col-md-6 col-lg-3 d-grid gap-2"
+        routerLink="/cirurgias/listar"
+      >
+        <mat-card-header>
+          <mat-card-title>Cirurgias</mat-card-title>
+          <mat-icon class="ms-auto">arrow_drop_down</mat-icon>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <span>Agende suas cirurgias de maneira prática e organizada.</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

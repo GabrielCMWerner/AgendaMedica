@@ -1,54 +1,34 @@
-<div class="row gap-3 custom">
-    <h1 class="p-0 fw-semi-bold">Bem-vindo(a) ao e-Agenda Médica</h1>
-  
-    <div class="row gap-3">
-  
-      <!-- Card médicos dashboard -->
-      <mat-card 
-        appCardHover 
-        class="col-12 col-md-6 col-lg-3 d-grid gap-2"
-        routerLink="/medicos/listar"
-      >
-        <mat-card-header>
-          <mat-card-title>Médicos</mat-card-title>
-          <mat-icon class="ms-auto">arrow_drop_down</mat-icon>
-        </mat-card-header>
-  
-        <mat-card-content>
-          <span>Crie perfis de médicos para uma organização eficaz de consultas e cirurgias.</span>
-        </mat-card-content>
-      </mat-card>
-  
-      <!-- Card consultas dashboard -->
-      <mat-card 
-        appCardHover 
-        class="col-12 col-md-6 col-lg-3 d-grid gap-2"
-        routerLink="/consultas/listar"
-      >
-        <mat-card-header>
-          <mat-card-title>Consultas</mat-card-title>
-          <mat-icon class="ms-auto">arrow_drop_down</mat-icon>
-        </mat-card-header>
-  
-        <mat-card-content>
-          <span>Agende suas consultas de forma conveniente e eficiente.</span>
-        </mat-card-content>
-      </mat-card>
-  
-      <!-- Card cirurgias dashboard -->
-      <mat-card 
-        appCardHover 
-        class="col-12 col-md-6 col-lg-3 d-grid gap-2"
-        routerLink="/cirurgias/listar"
-      >
-        <mat-card-header>
-          <mat-card-title>Cirurgias</mat-card-title>
-          <mat-icon class="ms-auto">arrow_drop_down</mat-icon>
-        </mat-card-header>
-  
-        <mat-card-content>
-          <span>Agende suas cirurgias de maneira prática e organizada.</span>
-        </mat-card-content>
-      </mat-card>
+<section class="mt-5">
+  <div class="container">
+    <div class="card">
+      <div class="row align-items-md-start gy-5 p-5">
+        <div class="col-12 col-md-7 d-flex flex-column justify-content-between">
+          <div>
+            <h1 class="card-title fw-bold text-primary">e-Agenda Médica</h1>
+            <div class="fs-5">
+              <p class="mt-4">
+                O <span class="text-warning fw-bold">e-Agenda médica</span> busca agilizar o gerenciamento da rotina diária ao facilitar o acesso e controle de agendamento de consultas e cirurgias.
+              </p>
+              <p class="text-primary fw-bold">O que você deseja gerenciar?</p>
+            </div>
+          </div>
+          <div>
+            <a class="btn btn-primary" routerLink="/medicos/listar">
+              <i class="bi bi-person me-2"></i>Médicos
+            </a>
+            <a class="btn btn-primary" routerLink="/cirurgias/listar">
+              <i class="bi bi-tools me-2"></i>Cirurgias
+            </a>
+            <a class="btn btn-primary" routerLink="/consultas/listar">
+              <i class="bi bi-calendar me-2"></i>Consultas
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-md-5">
+          <img src="/assets/dashboard-image.svg" class="img-fluid rounded" alt="Imagem do Dashboard" />
+        </div>
+      </div>
     </div>
   </div>
+</section>
+

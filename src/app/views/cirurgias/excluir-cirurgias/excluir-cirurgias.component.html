@@ -1,0 +1,61 @@
+<div class="row justify-content-center align-items-center mt-5">
+    <div class="col-md-5">
+      <h1 class="fs-2">Excluir Cirurgia</h1>
+  
+      <p class="fs-5">
+        Você tem certeza que deseja excluir a cirurgia?
+      </p>
+  
+      <mat-list *ngIf="cirurgiaVM | async as cirurgia">
+        <mat-list-item>
+          <div class="d-flex justify-content-between mt-3">
+            <span>Titulo:</span>
+            <span>{{cirurgia.titulo}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+  
+        <mat-list-item>
+          <div class="d-flex justify-content-between mt-3">
+            <span>Data:</span>
+            <span>{{cirurgia.data}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+  
+      <mat-list-item>
+        <div class="d-flex justify-content-between mt-3">
+          <span>Hora Inicio:</span>
+          <span>{{cirurgia.horaInicio}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+  
+    <mat-list-item>
+        <div class="d-flex justify-content-between mt-3">
+          <span>Hora Termino</span>
+          <span>{{cirurgia.horaTermino}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider> 
+  
+  
+      <div class="d-flex justify-content-end gap-2 mt-3">
+        <button
+          class="py-3 px-5"
+          color="warn"
+          mat-raised-button
+          (click)="gravar()"
+          >
+  
+          Excluir
+        </button>
+        <button
+          routerLink="/cirurgias/listar"
+          class="py-3 px-5"
+          color="primary"
+          mat-stroked-button
+        >
+          Voltar
+        </button>
+      </div>

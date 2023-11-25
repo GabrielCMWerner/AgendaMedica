@@ -1,0 +1,65 @@
+<div class="row justify-content-center align-items-center mt-5">
+    <div class="col-md-5">
+      <h1 class="fs-2">Agendar Consulta</h1>
+  
+      <form (ngSubmit)="gravar()" [formGroup]="form!" class="d-grid mt-4">
+  
+        <mat-form-field appearance="outline" class="d-grid mt-3">
+          <mat-label for="titulo">Título</mat-label>
+          <input
+          formControlName="titulo"
+          matInput type="text"
+          placeholder="Digite o Título" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Data:</mat-label>
+          <input type="date" formControlName="data" matInput />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Hora Início</mat-label>
+          <input 
+          formControlName="horaInicio"
+          type="time" 
+          matInput
+          placeholder="HH:mm"
+          />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Hora Final</mat-label>
+          <input 
+          formControlName="horaTermino"
+          type="time" 
+          matInput
+          placeholder="HH:mm"
+          />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Médicos</mat-label>
+          <mat-select formControlName="medicoId">
+            <mat-option *ngFor="let medico of (medicos$ | async)" [value]="medico.id">
+              {{ medico.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button type="submit" class="py-3 px-5" color="primary" mat-raised-button>
+            Salvar
+          </button>
+          <button
+            type="button"
+            routerLink="/consultas/listar"
+            class="py-3 px-5"
+            color="warn"
+            mat-stroked-button
+          >
+            Voltar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

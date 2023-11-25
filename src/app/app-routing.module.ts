@@ -1,16 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
+
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'medicos',
+    loadChildren: () =>
+      import('./views/medicos/medicos.module').then(
+        (m) => m.MedicosModule
+      ),
+  },
+
+  {
+    path: 'consultas',
+    loadChildren: () =>
+      import('./views/consultas/consultas.module').then(
+        (m) => m.ConsultasModule
+      ),
+  },
+
+  {
+    path: 'cirurgias',
+    loadChildren: () =>
+      import('./views/cirurgias/cirurgias.module').then(
+        (m) => m.CirurgiasModule
+      ),
   },
 ];
 

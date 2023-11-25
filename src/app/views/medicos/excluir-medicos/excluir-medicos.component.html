@@ -1,0 +1,71 @@
+<div class="row justify-content-center align-items-center mt-5">
+    <div class="col-md-5">
+      <h1 class="fs-2">Excluir Médico</h1>
+  
+      <p class="fs-5">
+        Você tem certeza que deseja excluir o seguinte médico?
+      </p>
+  
+      <mat-list *ngIf="medicosVM | async as medico">
+        <mat-list-item>
+          <div class="d-flex justify-content-between mt-3">
+            <span>Id:</span>
+            <span>{{medico.id}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+  
+        <mat-list-item>
+          <div class="d-flex justify-content-between mt-3">
+            <span>CRM:</span>
+            <span>{{medico.crm}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+  
+      <mat-list-item>
+        <div class="d-flex justify-content-between mt-3">
+          <span>Nome:</span>
+          <span>{{medico.nome}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+  
+    <mat-list-item>
+        <div class="d-flex justify-content-between mt-3">
+          <span>Telefone:</span>
+          <span>{{medico.telefone}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+  
+    <mat-list-item>
+        <div class="d-flex justify-content-between mt-3">
+          <span>Disponibilidade:</span>
+          <span>Sim</span>
+        </div>
+      </mat-list-item>
+      </mat-list>
+  
+  
+      <div class="d-flex justify-content-end gap-2 mt-3">
+        <button
+          class="py-3 px-5"
+          color="warn"
+          mat-raised-button
+          (click)="gravar()"
+          >
+  
+          Excluir
+        </button>
+        <button
+          routerLink="/medicos/listar"
+          class="py-3 px-5"
+          color="primary"
+          mat-stroked-button
+        >
+          Voltar
+        </button>
+      </div>
+    </div>
+  </div>

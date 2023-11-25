@@ -1,0 +1,63 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+  
+      <!-- Improved Sidenav Header -->
+      <mat-toolbar color="primary" class="mb-3">
+        <span class="fw-bold text-dark">Menu</span>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+          class="ml-auto"
+        >
+          <mat-icon aria-label="Side nav toggle icon" class="text-light">menu</mat-icon>
+        </button>
+      </mat-toolbar>
+  
+      <!-- Improved Sidenav Content -->
+      <mat-nav-list>
+        <a mat-list-item href="#" class="mb-2" matTooltip="Dashboard">
+          <span class="text-primary">Dashboard</span>
+        </a>
+        <a mat-list-item href="/medicos/listar" class="mb-2" matTooltip="Médicos">
+          <span class="text-primary">Médicos</span>
+        </a>
+        <a mat-list-item href="/cirurgias/listar" class="mb-2" matTooltip="Cirurgias">
+          <span class="text-primary">Cirurgias</span>
+        </a>
+        <a mat-list-item href="/consultas/listar" matTooltip="Consultas">
+          <span class="text-primary">Consultas</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- Main Content Area -->
+    <mat-sidenav-content>
+      <!-- Improved Toolbar -->
+      <mat-toolbar color="primary">
+        <button
+          type="button"        
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon" class="text-light">menu</mat-icon>
+        </button>
+        <span class="fw-bold text-light d-flex align-items-center gap-2"
+          >e-Agenda Médica<mat-icon class="ml-2">calendar_today</mat-icon></span
+        >
+      </mat-toolbar>
+  
+      <!-- Main Content Area -->
+      <main class="p-4">
+        <ng-content></ng-content>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

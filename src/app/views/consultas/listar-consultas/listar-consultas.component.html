@@ -14,11 +14,11 @@
         Nova Consulta
       </button>
   
-      <div class="row gap-3">
+      <div class="row gap-">
         <mat-card
           *ngFor="let consulta of consultas$ | async"
           appCardHover
-          class="col-12 col-md-6 col-lg-3"
+          class="col-10 col-md-7 col-lg-5 text-black"
         >
           <mat-card-header>
             <mat-card-title>
@@ -28,32 +28,27 @@
   
           <mat-card-content> </mat-card-content>
   
-          <mat-card-header>
-            <mat-card-title>
-              <span>{{ consulta.data}}</span>
-            </mat-card-title>
-          </mat-card-header>
-  
-          <mat-card-content> </mat-card-content>
 
-          <mat-card-content class="mt-3 fs-6">
+          <mat-card-content class="">
+            <mat-card-subtitle>
             <span>Data: {{ consulta.data | date: 'dd/MM/yyyy' }}</span>
+          </mat-card-subtitle>
           </mat-card-content>
 
           <mat-card-content> </mat-card-content>
   
           <mat-card-header>
-            <mat-card-title>
+            <mat-card-subtitle>
               <span>{{ consulta.horaInicio}}</span>
-            </mat-card-title>
+            </mat-card-subtitle>
           </mat-card-header>
   
           <mat-card-content> </mat-card-content>
   
           <mat-card-header>
-            <mat-card-title>
+            <mat-card-subtitle>
               <span>{{ consulta.horaTermino}}</span>
-            </mat-card-title>
+            </mat-card-subtitle>
           </mat-card-header>
   
           <mat-card-content> </mat-card-content>

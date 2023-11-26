@@ -4,8 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ListarMedicosViewModel } from '../../medicos/models/listar-medicos.View-Model';
 import { MedicosService } from '../../medicos/services/medicos.service';
 import { CirurgiasService } from '../services/cirugias.service';
-import { ToastrService } from 'ngx-toastr';
 import { Observable, map } from 'rxjs';
+import { FormsCirurgiasViewModel } from '../models/forms-cirurgias.View-Model';
+import { NotificationService } from 'src/app/core/notification/services/notification.service';
 
 @Component({
   selector: 'app-editar-cirurgia',
@@ -22,7 +23,7 @@ export class EditarCirurgiaComponent implements OnInit {
     private medicosService: MedicosService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastrService: ToastrService
+    private notification: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -47,24 +48,19 @@ export class EditarCirurgiaComponent implements OnInit {
     return this.form?.get(titulo)!.touched && this.form?.get(titulo)!.invalid;
   }
 
-  gravar() {
-    if (this.form?.invalid) {
-      for (let erro of this.form.validate()) {
-        this.toastrService.warning(erro);
-      }
-
-      return;
-    }
-
+  gravar(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
 
-    this.cirurgiasService.editar(id, this.form?.value).subscribe((res) => {
-      this.toastrService.success(
-        `A cirurgia"${res.titulo}" foi editada com sucesso!`,
-        'Sucesso'
-      );
-
-      this.router.navigate(['/cirurgias/listar']);
+    this.cirurgiasService.editar(id, this.form?.value).subscribe({
+      next: (res) => this.processarSucesso(res),
+      error: (err) => this.processarFalha(err),
     });
+  }
+  processarSucesso(res: FormsCirurgiasViewModel) {
+    this.router.navigate(['/cirurgias', 'listar']);
+  }
+
+  processarFalha(err: any) {
+    this.notification.erro(err.error.erros[0]);
   }
 }

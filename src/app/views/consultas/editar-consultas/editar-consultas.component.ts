@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import ConsultasService from '../services/consultas.service';
 import { Observable, map } from 'rxjs';
 import { ListarMedicosViewModel } from '../../medicos/models/listar-medicos.View-Model';
+import { FormsConsultasViewModel } from '../models/forms-consultas.View-Model';
+import { NotificationService } from 'src/app/core/notification/services/notification.service';
 
 @Component({
   selector: 'app-editar-consultas',
@@ -19,7 +20,7 @@ export class EditarConsultasComponent {
     constructor(
       private fb: FormBuilder,
       private consultasService: ConsultasService,
-      private toastrService: ToastrService,
+      private notification: NotificationService,
       private router: Router,
       private route: ActivatedRoute
     ) {}
@@ -45,25 +46,20 @@ export class EditarConsultasComponent {
       return this.form?.get(nome)!.touched && this.form?.get(nome)!.invalid;
     }
 
-    gravar() {
-      if (this.form?.invalid) {
-        for (let erro of this.form.validate()) {
-          this.toastrService.warning(erro);
-        }
-
-        return;
-      }
-
+    gravar(): void {
       const id = this.route.snapshot.paramMap.get('id')!;
 
-      this.consultasService.editar(id, this.form?.value).subscribe((res) => {
-        this.toastrService.success(
-          `A consulta "${res.titulo}" foi editada com sucesso!`,
-          'Sucesso'
-        );
-
-        this.router.navigate(['/consultas/listar']);
+      this.consultasService.editar(id, this.form?.value).subscribe({
+        next: (res) => this.processarSucesso(res),
+        error: (err) => this.processarFalha(err),
       });
+    }
+    processarSucesso(res: FormsConsultasViewModel) {
+      this.router.navigate(['/consultas', 'listar']);
+    }
+
+    processarFalha(err: any) {
+      this.notification.erro(err.error.erros[0]);
     }
 
 }

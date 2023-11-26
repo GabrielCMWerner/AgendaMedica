@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MedicosService } from '../services/medicos.service';
-import { ToastrService } from 'ngx-toastr';
 import { FormsMedicosViewModel } from '../models/forms-medicos.View-Model';
+import { NotificationService } from 'src/app/core/notification/services/notification.service';
 
 @Component({
   selector: 'app-editar-medicos',
@@ -18,7 +18,7 @@ export class EditarMedicosComponent implements OnInit {
       private fb: FormBuilder,
       private medicosService: MedicosService,
       private router: Router,
-      private toastrService: ToastrService,
+      private notification: NotificationService,
       private route: ActivatedRoute
     ) {}
 
@@ -36,24 +36,18 @@ export class EditarMedicosComponent implements OnInit {
       return this.form?.get(nome)!.touched && this.form?.get(nome)!.invalid;
     }
   
-    gravar() {
-      if (this.form?.invalid) {
-        for (let erro of this.form.validate()) {
-          this.toastrService.warning(erro);
-        }
-  
-        return;
-      }
-  
+    gravar(): void {
       const id = this.route.snapshot.paramMap.get('id')!;
-  
-      this.medicosService.editar(id, this.form?.value).subscribe((res) => {
-        this.toastrService.success(
-          `O médico ${res.nome} foi editada com sucesso!`,
-          'Sucesso'
-        );
-  
-        this.router.navigate(['/medicos/listar']);
+      this.medicosService.editar(id, this.form?.value).subscribe({
+        next: (res) => this.processarSucesso(res),
+        error: (err) => this.processarFalha(err),
       });
+    }
+  processarSucesso(res: FormsMedicosViewModel) {
+      this.router.navigate(['/medicos', 'listar']);
+    }
+
+    processarFalha(err: any) {
+      this.notification.erro(err.error.erros[0]);
     }
 }

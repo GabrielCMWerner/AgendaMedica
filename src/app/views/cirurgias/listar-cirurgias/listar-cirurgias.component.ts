@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { CirurgiasService } from '../services/cirugias.service';
 import { ListarCirurgiasViewModel } from '../models/listar-cirurgias.View-Model';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -15,9 +16,9 @@ export class ListarCirurgiasComponent implements OnInit {
 
   cirurgia$?: Observable<ListarCirurgiasViewModel[]>;
 
-  constructor(private cirurgiasService: CirurgiasService) {}
+  constructor(private route: ActivatedRoute, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
-    this.cirurgia$ = this.cirurgiasService.selecionarTodos();
+    this.cirurgia$ = this.route.data.pipe(map(dados => dados['cirurgias']));;
   }
 }

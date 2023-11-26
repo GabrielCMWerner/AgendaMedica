@@ -1,34 +1,37 @@
 import { NgModule, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
-import { ConsultasService } from './services/consultas.service';
 import { ListarConsultasComponent } from './listar-consultas/listar-consultas.component';
-
 import { MedicosService } from '../medicos/services/medicos.service';
-import { VisualizarConsultasViewModel } from './models/visualizar-consultas.View-Model';
+
 import { EditarConsultasComponent } from './editar-consultas/editar-consultas.component';
 import { ExcluirConsultasComponent } from './excluir-consultas/excluir-consultas.component';
 import { InserirConsultasComponent } from './inserir-consultas/inserir-consultas.component';
+import ConsultasService from './services/consultas.service';
+import { FormsConsultasViewModel } from './models/forms-consultas.View-Model';
+import { VisualizarConsultasViewModel } from './models/visualizar-consultas.View-Model';
 
-const formsConsultasResolver = (route: ActivatedRouteSnapshot) => {
-  const id = route.paramMap.get('id')!;
 
-  return inject(ConsultasService).selecionarPorId(id);
-};
 
 const listarConsultasResolver = () => {
   return inject(ConsultasService).selecionarTodos();
 };
 
-const visualizarConsultasResolver: ResolveFn<VisualizarConsultasViewModel> = (
-  route: ActivatedRouteSnapshot
-) => {
-  return inject(ConsultasService).selecionarPorId(
-    route.paramMap.get('id')!
-  );
-};
-
 const listarMedicosResolver = () => {
   return inject(MedicosService).selecionarTodos();
+};
+
+const formsConsultaResolver: ResolveFn<FormsConsultasViewModel> = (
+  route: ActivatedRouteSnapshot
+) => {
+  return inject(ConsultasService).selecionarPorId(route.paramMap.get('id')!);
+};
+
+const visualizarConsultaResolver: ResolveFn<VisualizarConsultasViewModel> = (
+  route: ActivatedRouteSnapshot
+) => {
+  return inject(ConsultasService).selecionarPorIdCompleto(
+    route.paramMap.get('id')!
+  );
 };
 
 const routes: Routes = [
@@ -50,15 +53,15 @@ const routes: Routes = [
   {
     path: 'editar/:id',
     component: EditarConsultasComponent,
-    resolve: { consulta: formsConsultasResolver,  medicos: listarMedicosResolver },
+    resolve: { consulta: formsConsultaResolver, medicos: listarMedicosResolver },
   },
   {
     path: 'excluir/:id',
     component: ExcluirConsultasComponent,
-    resolve: { consulta: visualizarConsultasResolver },
+    resolve: { consulta: visualizarConsultaResolver },
   },
-
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

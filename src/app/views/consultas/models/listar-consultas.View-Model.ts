@@ -1,8 +1,8 @@
 export type ListarConsultasViewModel = {
-  id: string,
+  id: string;
   titulo: string;
   data: Date;
-  horaInicio: string;
-  horaTermino: string;
+  horaInicio: Date;
+  horaTermino: Date;
   nomeMedico: string;
-};
+}

@@ -13,8 +13,17 @@
         </mat-form-field>
   
         <mat-form-field appearance="outline">
-          <mat-label>Data:</mat-label>
-          <input type="date" formControlName="data" matInput />
+          <mat-label>Data</mat-label>
+          <input
+            [ngClass]="campoEstaInvalido('data') ? 'is-invalid' : ''"
+            type="text"
+            formControlName="data"
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Escolha uma data"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
   
         <mat-form-field appearance="outline">
@@ -40,7 +49,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Médicos</mat-label>
           <mat-select formControlName="medicoId">
-            <mat-option *ngFor="let medico of (medicos | async)" [value]="medico.id">
+            <mat-option *ngFor="let medico of (medicos$ | async)" [value]="medico.id">
               {{ medico.nome }}
             </mat-option>
           </mat-select>

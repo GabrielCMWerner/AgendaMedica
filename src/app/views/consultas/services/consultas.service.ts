@@ -10,7 +10,7 @@ import { ListarMedicosViewModel } from '../../medicos/models/listar-medicos.View
 
 
 @Injectable()
-export class ConsultasService {
+export default class ConsultasService {
   private API_URL = `${environment.API_URL}/Consulta`;
 
   constructor(private http: HttpClient) {}
@@ -50,10 +50,5 @@ export class ConsultasService {
     .pipe(map(res => res.dados));
   }
 
-  selecionarTodosMedicosCirurgias(id: string): Observable<ListarMedicosViewModel[]> {
-    const url = `${this.API_URL}/medicos/${id}`;
-
-    return this.http.get<any>(url)
-    .pipe(map(res => res.dados), tap(x => console.log(x)));
-  }
+  
 }

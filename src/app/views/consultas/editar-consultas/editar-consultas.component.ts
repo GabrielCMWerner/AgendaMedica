@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConsultasService } from '../services/consultas.service';
+import ConsultasService from '../services/consultas.service';
 import { Observable, map } from 'rxjs';
 import { ListarMedicosViewModel } from '../../medicos/models/listar-medicos.View-Model';
 
@@ -14,10 +14,10 @@ import { ListarMedicosViewModel } from '../../medicos/models/listar-medicos.View
 export class EditarConsultasComponent {
 
     form?: FormGroup;
-    medicos?: Observable<ListarMedicosViewModel[]>
+    medicos$?: Observable<ListarMedicosViewModel[]>
 
     constructor(
-      private formBuilder: FormBuilder,
+      private fb: FormBuilder,
       private consultasService: ConsultasService,
       private toastrService: ToastrService,
       private router: Router,
@@ -25,15 +25,16 @@ export class EditarConsultasComponent {
     ) {}
 
     ngOnInit(): void {
-      this.form = this.formBuilder.group({
-        titulo: [''],
-        data: [''],
-        horaInicio: [''],
-        horaTermino: [''],
-        medicoId: new FormControl(''),
-      });    
+      this.form = this.fb.group({
+        titulo: new FormControl('', [Validators.required]),
+        data: new FormControl('', [Validators.required,]),
+        horaInicio: new FormControl('', [Validators.required]),
+        horaTermino: new FormControl('', [Validators.required]),
+        medicoId: new FormControl('', [Validators.required]),
+      }) 
+    
 
-      this.medicos = this.route.data.pipe(map(dados => dados['medicos']));
+      this.medicos$ = this.route.data.pipe(map(dados => dados['medicos']));
 
       const consulta = this.route.snapshot.data['consulta'];
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ConsultasService } from '../services/consultas.service';
+import { Observable, map } from 'rxjs';
+import ConsultasService from '../services/consultas.service';
 import { ListarConsultasViewModel } from '../models/listar-consultas.View-Model';
+import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-listar-consultas',
@@ -12,10 +14,10 @@ export class ListarConsultasComponent implements OnInit{
 
   consultas$?: Observable<ListarConsultasViewModel[]>;
 
-  constructor(private consultasService: ConsultasService) {}
+  constructor(private route: ActivatedRoute, private datePipe: DatePipe)  {}
 
   ngOnInit(): void {
-    this.consultas$ = this.consultasService.selecionarTodos();
+    this.consultas$ = this.route.data.pipe(map(dados => dados['consultas']));
   }
   
 

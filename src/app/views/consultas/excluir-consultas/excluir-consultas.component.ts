@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VisualizarConsultasViewModel } from '../models/visualizar-consultas.View-Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConsultasService } from '../services/consultas.service';
+import ConsultasService from '../services/consultas.service';
 import { Observable, map } from 'rxjs';
 
 @Component({

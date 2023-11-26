@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { CirurgiasRoutingModule } from './cirurgias-routing.module';
 import { ListarCirurgiasComponent } from './listar-cirurgias/listar-cirurgias.component';
@@ -12,6 +12,7 @@ import 'src/app/extensions/form-group.extension';
 import { MedicosService } from '../medicos/services/medicos.service';
 import { ExcluirCirurgiaComponent } from './excluir-cirurgias/excluir-cirurgias.component';
 import { VisualizarMedicoCirurgiaComponent } from './visualizar-medicos-cirurgia/visualizar-medicos-cirurgia.component';
+import ConsultasService from '../consultas/services/consultas.service';
 
 
 
@@ -32,6 +33,6 @@ import { VisualizarMedicoCirurgiaComponent } from './visualizar-medicos-cirurgia
     ReactiveFormsModule,
   ],
   
-  providers: [CirurgiasService, MedicosService],
+  providers: [CirurgiasService, MedicosService, DatePipe]
 })
 export class CirurgiasModule { }

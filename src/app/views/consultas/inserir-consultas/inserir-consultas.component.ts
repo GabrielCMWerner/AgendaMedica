@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConsultasService } from '../services/consultas.service';
+import ConsultasService from '../services/consultas.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -28,11 +28,12 @@ export class InserirConsultasComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       titulo: new FormControl('', [Validators.required]),
-      data: new FormControl('', [Validators.required]),
+      data: new FormControl('', [Validators.required,]),
       horaInicio: new FormControl('', [Validators.required]),
-      horaTermino: new FormControl('', [Validators.required]), 
-      medicoId: new FormControl('')
+      horaTermino: new FormControl('', [Validators.required]),
+      medicoId: new FormControl('', [Validators.required]),
     });
+
 
     this.medicos$ = this.route.data.pipe(map(dados => dados['medicos']));
    

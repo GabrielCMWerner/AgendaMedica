@@ -15,10 +15,10 @@ export class ListarMedicosComponent implements OnInit{
 
   medicos$?: Observable<ListarMedicosViewModel[]>;
 
-  constructor(private medicosService: MedicosService) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.medicos$ = this.medicosService.selecionarTodos();
+    this.medicos$ = this.route.data.pipe(map(dados=> dados['medico']));
   }
 }
 

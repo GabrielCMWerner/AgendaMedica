@@ -6,7 +6,7 @@ import { EditarMedicosComponent } from './editar-medicos/editar-medicos.componen
 import { ExcluirMedicosComponent } from './excluir-medicos/excluir-medicos.component';
 import { MedicosService } from './services/medicos.service';
 
-import { ConsultasService } from '../consultas/services/consultas.service';
+import ConsultasService from '../consultas/services/consultas.service';
 import { VisualizarConsultasViewModel } from '../consultas/models/visualizar-consultas.View-Model';
 import { VisualizarMedicosViewModel } from './models/visualizar-medicos.View-Model';
 import { ListarConsultasViewModel } from '../consultas/models/listar-consultas.View-Model';
@@ -59,12 +59,12 @@ const routes: Routes = [
   {
     path: 'listar',
     component: ListarMedicosComponent,
+    resolve: { medico: listarMedicosResolver },
   },
 
   {
     path: 'inserir',
     component: InserirMedicosComponent,
-    resolve: { medico: listarMedicosResolver },
   },
 
   {
